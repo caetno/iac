@@ -1,0 +1,20 @@
+init:
+  tofu -chdir=identity init
+  tofu -chdir=cluster init 
+  tofu -chdir=platform init 
+  tofu -chdir=platform-config init 
+
+apply:
+  tofu -chdir=identity apply -auto-approve 
+  tofu -chdir=cluster apply -auto-approve
+  tofu -chdir=platform apply -auto-approve
+  tofu -chdir=platform-config apply -auto-approve
+
+destroy:
+  tofu -chdir=platform-config destroy -auto-approve
+  tofu -chdir=platform destroy -auto-approve
+  tofu -chdir=cluster destroy -auto-approve
+
+get-config:
+  tofu -chdir=cluster output -raw kubeconfig_raw > cluster/kubeconfig
+  tofu -chdir=cluster output -raw talosconfig_raw > cluster/talosconfig
