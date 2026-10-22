@@ -8,8 +8,9 @@ ARM_CLIENT_CERTIFICATE_PATH=''
 ARM_CLIENT_CERTIFICATE_PASSWORD=''
 
 > [!CAUTION]
-> This is not sufficient for production!
-> Production environments should use a Secret Store like Vault/OpenBao.
+> Make sure the private key is stored securely!
+> Production environments should use a Secret Store like Vault/OpenBao, Azure Key Vault.
+> Or OIDC to eliminate the need for long lived secrets for applications.
 
 ### With openssl
 
@@ -45,7 +46,7 @@ step certificate create tofu-lab tofu.crt tofu.key \
 step certificate p12 tofu.pfx tofu.crt tofu.key
 ```
 
-## Setting access roles
+## Setting API permissions
 
 ```
 Application.Read.All
@@ -54,7 +55,6 @@ Group.Read.All
 Group.ReadWrite.All
 Policy.Read.All
 Policy.ReadWrite.ConditionalAccess
-User.Read
 User.Read.All
 User.ReadWrite.All
 ```
