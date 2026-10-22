@@ -17,8 +17,6 @@ provider "azurerm" {
 }
 
 provider "azuread" {
-  # TF_TENANT_ID
-  #   tenant_id = 
 }
 
 data "azuread_client_config" "current" {}
