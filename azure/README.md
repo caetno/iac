@@ -1,6 +1,17 @@
-# Creating a certificate for the Application in Entra
+# Creating an Application in Entra for Terraform/Tofu
 
-## With openssl
+## Creating a certificate for the Application in Entra
+
+You should create this outside of the repository.
+Then reference the path an password in environment variables.
+ARM_CLIENT_CERTIFICATE_PATH=''
+ARM_CLIENT_CERTIFICATE_PASSWORD=''
+
+> [!CAUTION]
+> This is not sufficient for production!
+> Production environments should use a Secret Store like Vault/OpenBao.
+
+### With openssl
 
 ```
 umask 077
@@ -17,7 +28,7 @@ openssl pkcs12 -export \
   -out tofu.pfx
 ```
 
-## OR with smallstep
+### OR with smallstep
 
 ```
 umask 077
@@ -32,4 +43,18 @@ step certificate create tofu-lab tofu.crt tofu.key \
   --insecure
 
 step certificate p12 tofu.pfx tofu.crt tofu.key
+```
+
+## Setting access roles
+
+```
+Application.Read.All
+Application.ReadWrite.All
+Group.Read.All
+Group.ReadWrite.All
+Policy.Read.All
+Policy.ReadWrite.ConditionalAccess
+User.Read
+User.Read.All
+User.ReadWrite.All
 ```
