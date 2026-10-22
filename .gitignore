@@ -3,6 +3,7 @@ kubeconfig
 talosconfig
 .env
 
+.direnv
 
 # Local .terraform directories
 .terraform/
